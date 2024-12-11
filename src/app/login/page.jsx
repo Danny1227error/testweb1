@@ -47,23 +47,23 @@ function LoginPage() {
         <Navbar />
             <div className='flex-grow'>
                 <div className='flex justify-center items-center'>
-                    <div className='w-[400px] shadow-xl p-10 mt-5 rounded-xl'>
+                    <div className='bg-gray-300 w-[400px] shadow-xl p-10 mt-5 rounded-xl'>
                         <h3 className='text-3xl'>Login</h3>
                         <hr className='my-3' />
                         <form onSubmit={handleSubmit}>
 
                             {error && (
-                                <div className='bg-red-500 w-fit text-sm text-white py-1 px-3 rounded-md mt-2'>
+                                <div className='bg-red-900 w-fit text-sm text-white py-1 px-3 rounded-md mt-2'>
                                     {error}
                                 </div>
                             )}
 
-                            <input type="text" onChange={(e) => setEmail(e.target.value)} className='w-full bg-gray-200 border py-2 px-3 rounded text-lg my-2' placeholder='Enter your email' />
-                            <input type="password" onChange={(e) => setPassword(e.target.value)} className='w-full bg-gray-200 border py-2 px-3 rounded text-lg my-2' placeholder='Enter your password' />
-                            <button className='bg-green-500 text-white border py-2 px-3 rounded text-lg my-2' type='submit'>Sign In</button>
+                            <input type="text" onChange={(e) => setEmail(e.target.value)} className='w-full bg-gray-50 border py-2 px-3 rounded text-lg my-2' placeholder='Enter your email' />
+                            <input type="password" onChange={(e) => setPassword(e.target.value)} className='w-full bg-gray-50 border py-2 px-3 rounded text-lg my-2' placeholder='Enter your password' />
+                            <button className='bg-green-400 text-green-50 border py-2 px-3 rounded text-lg my-2 hover:bg-green-900 hover:text-black' type='submit'>Sign In</button>
                             <hr className='my-3' />
                             <p>
-                                Do not have an account? Go go <Link href="/register" className='text-blue-500 hover:underline'>Register</Link> Page
+                                Do not have an account? Go go <Link href="/register" className='text-blue-500 hover:text-sky-500'>Register</Link> Page
                             </p>
                         </form>
                     </div>
