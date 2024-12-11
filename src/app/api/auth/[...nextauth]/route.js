@@ -7,44 +7,41 @@ import bcrypt from 'bcryptjs'
 const authOptions = {
     providers: [
         CredentialsProvider({
-          name: 'credentials',
-          credentials: {},
-          async authorize(credentials, req) {
-            
-            const { email, password } = credentials;
+            name: 'credentials',
+            credentials: {},
+            async authorize(credentials, req) {
+                const { email, password } = credentials;
 
-            try {
+                try {
+                    await connectMongoDB();
+                    const user = await User.findOne({ email });
 
-                await connectMongoDB();
-                const user = await User.findOne({ email });
+                    if (!user) {
+                        return null;
+                    }
 
-                if (!user) {
-                    return null;
+                    const passwordMatch = await bcrypt.compare(password, user.password);
+
+                    if (!passwordMatch) {
+                        return null;
+                    }
+
+                    return user;
+
+                } catch(error) {
+                    console.log("Error: ", error);
                 }
-
-                const passwordMatch = await bcrypt.compare(password, user.password);
-
-                if (!passwordMatch) {
-                    return null;
-                }
-
-                return user;
-
-            } catch(error) {
-                console.log("Error: ", error);
             }
-            
-          }
         })
-      ],
-      session: {
+    ],
+    session: {
         strategy: "jwt"
-      },
-      secret: process.env.NEXTAUTH_SECRET,
-      pages: {
+    },
+    secret: "d7238j3g48fg834gf8g348fg834f834hf834",
+    pages: {
         signIn: "/login"
-      },
-      callbacks: {
+    },
+    callbacks: {
         async jwt({ token, user, session }) {
             if (user) {
                 return {
@@ -66,7 +63,7 @@ const authOptions = {
                 }
             }
         }
-      }
+    }
 }
 
 const handler = NextAuth(authOptions);
